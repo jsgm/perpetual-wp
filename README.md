@@ -5,9 +5,12 @@
     <img alt="Perpetual WP Logo" src="assets/images/logo-white.svg" height="150px">
   </picture>
 </p>
-<h2 align="center">Simplify and enhance WordPress. Remove the bloat.</h2>
 
-![Building](https://github.com/jsgm/perpetual-wp/actions/workflows/phplint.yml/badge.svg) ![License](https://img.shields.io/github/license/jsgm/perpetual-wp)
+> [!NOTE]  
+> Once you've installed the plugin, all updates are automatically installed from GitHub. Please note, this plugin **is not available in the WordPress.org repository**.
+
+![Build](https://img.shields.io/github/actions/workflow/status/jsgm/perpetual-wp/phplint.yml) ![License](https://img.shields.io/github/license/jsgm/perpetual-wp) ![Last release](https://img.shields.io/github/v/release/jsgm/perpetual-wp) ![Last commit](https://img.shields.io/github/last-commit/jsgm/perpetual-wp/main
+)
 
 ## What is Perpetual WP?
 Perpetual WP removes bloat and delivers straightforward enhancements to your WordPress—no configuration required.
