@@ -7,6 +7,8 @@
 </p>
 <h2 align="center">Simplify and enhance WordPress. Remove the bloat.</h2>
 
+![Building](https://github.com/jsgm/perpetual-wp/actions/workflows/phplint.yml/badge.svg) ![License](https://img.shields.io/github/license/jsgm/perpetual-wp)
+
 ## What is Perpetual WP?
 Perpetual WP removes bloat and delivers straightforward enhancements to your WordPress—no configuration required.
 
