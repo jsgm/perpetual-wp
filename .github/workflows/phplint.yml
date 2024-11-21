@@ -1,0 +1,13 @@
+name: Building
+on:
+  push:
+    branches: [ main ]
+jobs:
+  phplint:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v1
+        - uses: overtrue/phplint@6.0.0
+          with:
+            path: .
+            options: --exclude=*.log
