@@ -23,19 +23,6 @@ add_filter('admin_footer_text', function(){
     return '';
 });
 
-add_action('wp_before_admin_bar_render', function(){
-    global $wp_admin_bar;
-
-    // Remove the WordPress logo.
-    $wp_admin_bar->remove_menu('wp-logo');
-
-    // Remove the search button from the "wpadminbar" element.
-    $wp_admin_bar->remove_node('search');
-
-    // Remove "my account".
-    $wp_admin_bar->remove_node('my-account');
-});
-
 add_action("admin_menu", function(){
     // Ensures that the WordPress version is removed from the footer text, 
     // even if the 'admin_footer_text' filter is manually modified by the user.
@@ -105,34 +92,7 @@ if(!function_exists("pw_admin_redirect")){
 // Avoid displaying the language selection dropdown on the login screen.
 add_filter("login_display_language_dropdown", "__return_false");
 
-add_action('login_enqueue_scripts', function(){
-    echo '<style type="text/css">
-    #login h1 a {
-        background-image: url(\''.plugin_dir_url(PW_PLUGIN_FILE).'assets/images/icon.svg?v=a\');
-		background-repeat: no-repeat;
-    }
-    #login{
-        padding: 0px !important;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-    }
-    </style>';
-}, PHP_INT_MAX);
-
 add_action( 'admin_bar_menu', function(\WP_Admin_Bar $admin_bar){
-    $admin_bar->add_node([
-        'id'    => 'pw-logo',
-        'title' => '<span class="ab-icon pw-logo"></span>',
-        'href'  => PW_HOMEPAGE,
-        'meta'  => array(
-            'target' => '_blank',
-            'rel' => 'nofollow',
-            'title' => __( 'About Perpetual WP', 'perpetual-wp' ),
-        )
-    ]);
-
     // Simplify account button.
     $profile_url = false;
 	$current_user = wp_get_current_user();
@@ -180,7 +140,20 @@ add_action( 'admin_bar_menu', function(\WP_Admin_Bar $admin_bar){
 			'href'   => wp_logout_url(),
 		)
 	);
-}, PHP_INT_MIN);
+
+    // Remove the WordPress logo.
+    $admin_bar->remove_menu('wp-logo');
+
+    // Remove the search button from the "wpadminbar" element.
+    $admin_bar->remove_node('search');
+
+    // Remove "my account".
+    $admin_bar->remove_node('my-account');
+
+    // Remove "Visit Site" from the "site-name" menu as it is redundant.
+    // TO-DO: Add title="" tag with __("Visit Site")
+    $admin_bar->remove_node("view-site");
+}, PHP_INT_MAX);
 
 add_action('wp_dashboard_setup', function(){
     global $wp_meta_boxes;
@@ -201,20 +174,33 @@ add_action('wp_dashboard_setup', function(){
     }
 });
 
-/* Limit heartbeat control. */
-add_filter( 'heartbeat_settings', function(){
-	$settings['interval'] = 60;
-	return $settings;
-});
+if(defined("PW_REPLACE_WP_BRANDING") && PW_REPLACE_WP_BRANDING == true){
+    add_action('login_enqueue_scripts', function(){
+        echo '<style type="text/css">
+        #login h1 a {
+            background-image: url(\''.plugin_dir_url(PW_PLUGIN_FILE).'assets/images/icon.svg\');
+            background-repeat: no-repeat;
+        }
+        #login{
+            padding: 0px !important;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        </style>';
+    }, PHP_INT_MAX);
 
-/* Disable thumbnail previews. */
-add_filter('fallback_intermediate_image_sizes', function(){
-	$fallbacksizes = array(); 
-	return $fallbacksizes;
-});
-
-/* Speed up WordPress admin area */
-add_filter( 'postmeta_form_keys', function() { return array(); });
-add_filter( 'media_library_months_with_files', function() { return array(); });
-add_filter( 'media_library_show_audio_playlist', function() { return false; });
-add_filter( 'media_library_show_video_playlist', function() { return false; });
+    add_action( 'admin_bar_menu', function(\WP_Admin_Bar $admin_bar){
+        $admin_bar->add_node([
+            'id'    => 'pw-logo',
+            'title' => '<span class="ab-icon pw-logo"></span>',
+            'href'  => PW_HOMEPAGE,
+            'meta'  => array(
+                'target' => '_blank',
+                'rel' => 'nofollow',
+                'title' => __( 'About Perpetual WP', 'perpetual-wp' ),
+            )
+        ]);
+    }, PHP_INT_MIN);
+}

@@ -4,7 +4,7 @@ Plugin Name: PerpetualWP
 Plugin URI: https://github.com/jsgm/perpetual-wp
 Description: 
 Author: José Aguilera
-Version: 1.0
+Version: 1.01
 Author URI: https://jsgm.dev
 Update URI: false
 */
@@ -14,7 +14,7 @@ if(!defined("ABSPATH")){
 }
 
 define("PW_NAME", "Perpetual WP");
-define("PW_VERSION", "1.0");
+define("PW_VERSION", "1.01");
 define("PW_HOMEPAGE", "https://github.com/jsgm/perpetual-wp");
 define("PW_PLUGIN_FILE", __FILE__);
 
@@ -23,31 +23,9 @@ if(!defined("PHP_INT_MIN")){
     define('PHP_INT_MIN', ~PHP_INT_MAX);
 }
 
-if(!defined("FORCE_SSL_ADMIN")){
-    // Forces SSL on admin panel.
-    define("FORCE_SSL_ADMIN", TRUE);
-
-    if(isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strpos($_SERVER["HTTP_X_FORWARDED_PROTO"], "https") !== FALSE){
-        $_SERVER['HTTPS'] = 'on';
-    }
-}
-
-if(!defined('DISALLOW_FILE_EDIT')){
-    // Disables embebbed file editor.
-    define('DISALLOW_FILE_EDIT', TRUE);
-}
-
-if(!function_exists("pw_disable_module")){
-    function pw_disable_module($module=""){
-        // TO-DO.
-    }
-}
-add_action("init", function(){
-    load_plugin_textdomain('perpetual-wp', false, 'perpetual-wp/lang/' );
-});
-
 $modules = apply_filters("pw_modules", [
     "helpers",
+    "languages",
     "activation-hook",
     "updater",
 
@@ -55,7 +33,6 @@ $modules = apply_filters("pw_modules", [
     // TO-DO: "disable/pingbacks"
     // TO-DO: "disable/password-strength"
     // TO-DO: "disable/application-passwords"
-    // TO-DO: "disable/howdy-admin-bar"
     // TO-DO: "disable/adjacent-posts"
     "disable/hello-dolly",
     "disable/initial-content",
@@ -81,7 +58,6 @@ $modules = apply_filters("pw_modules", [
     // TO-DO: "features/blank-favicon"
     // TO-DO: "features/email" (SMTP, Fully Disable emails)
     // TO-DO: "features/maintenance"
-    // TO-DO: "features/auto-empty-spam-trash"
     "features/page-priorize",
 
     // Security enhancements.
@@ -89,19 +65,21 @@ $modules = apply_filters("pw_modules", [
     // TO-DO: "security/2fa"
     // TO-DO: "security/limit-login-attempts"
     // TO-DO: "security/logout-idle-users"
+    "security/disallow-file-edit",
+    "security/force-ssl",
 
     // Revert to the classic editor and widgets interface.
     "classic/widgets",
     "classic/editor",
 
     // Changes or minor enhancements that do not necessarily remove WordPress features.
-    // TO-DO: "improve/media"
     // TO-DO: "improve/woocommerce" (Deablot, Disable woocommerce logout confirmation)
-    // TO-DO: "improve/missed-schedule"
+    "improve/media",
+    "improve/wp-admin",
     "improve/comments",
     "improve/environment",
-    "improve/wp-admin",
     "improve/rest-api",
+    "improve/heartbeat",
 ]);
 
 if(is_array($modules) && !empty($modules)){
@@ -113,4 +91,3 @@ if(is_array($modules) && !empty($modules)){
         require $route;
     }
 }
-
