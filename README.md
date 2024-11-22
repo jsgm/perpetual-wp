@@ -16,3 +16,11 @@
 Perpetual WP removes bloat and delivers straightforward enhancements to your WordPress—no configuration required.
 
 While alternatives like [ClassicPress](https://classicpress.net), which is a full fork of WordPress, Perpetual WP takes a unique approach as a plugin, ensuring full compatibility with the latest version of WordPress.
+
+## Functions
+Perpetual-wp also introduces a few functions for developers. All functions will be prefixed with `pw_` instead the default `wp_`.
+
+Function|Description
+---|---
+`pw_count_hooks(string $tag, int $priority): int`|Returns the total number of hooks registered for a filter or action.<br>If no priority is specified, it returns the count of all hooks across all priority levels.
+`pw_is_crawler(string $user_agent): bool`|Checks if the given $user_agent belongs to a known crawler.<br>If no $user_agent is provided, the function checks the current user's agent string.
