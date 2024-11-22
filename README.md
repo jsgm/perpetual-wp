@@ -17,6 +17,16 @@ Perpetual WP removes bloat and delivers straightforward enhancements to your Wor
 
 While alternatives like [ClassicPress](https://classicpress.net), which is a full fork of WordPress, Perpetual WP takes a unique approach as a plugin, ensuring full compatibility with the latest version of WordPress.
 
+## Disabled features
+**Perpetual WP** disables unnecessary features to keep the admin panel cleaner and improve performance. 
+
+### Prevent a feature from being disabled
+WordPress use cases can vary greatly, and it’s possible that you may need some of the features that are disabled.
+
+**Perpetual WP** honors your choices whenever possible, and in other cases, you can modify the settings through wp-admin under `Settings > General`. For instance, while WordPress defaults to enabling post revisions with `WP_POST_REVISIONS` set to true, this plugin will automatically set it to `false` unless you specify a different value in your wp-config.php file.
+
+For any other cases, you can use the filter `pw_modules`. This allows you to disable any feature via a child theme or directly by other plugin developers, preventing undesired behaviours.
+
 ## Functions
 Perpetual-wp also introduces a few functions for developers. All functions will be prefixed with `pw_` instead the default `wp_`.
 
