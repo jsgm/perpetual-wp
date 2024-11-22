@@ -20,15 +20,51 @@ While alternatives like [ClassicPress](https://classicpress.net), which is a ful
 ## Disabled features
 **Perpetual WP** disables unnecessary features to keep the admin panel cleaner and improve performance. 
 
-### Prevent a feature from being disabled
-WordPress use cases can vary greatly, and it’s possible that you may need some of the features that are disabled.
+||Description|
+|--|--|
+|`disable/hello-dolly`|Automatically deletes "Hello Dolly" from fresh installs. To use it, place it in `mu-plugins`.|
+|`disable/initial-content`|Deletes the default content —"Hello world!", "Sample Page," and "Privacy Policy"—.|
+|`disable/admin-email-verification`|Disable admin email verifications. For more details, [check this](https://make.wordpress.org/core/2019/10/17/wordpress-5-3-admin-email-verification-screen/).|
+|`disable/capital-p-dangit`|Prevents "Wordpress" from being converted to "WordPress".|
+|`disable/emojis`||
+|`disable/generators`|
+|`disable/oembed`|
+|`disable/post-by-email`|
+|`disable/post-revisions`|
+|`disable/privacy-tools`|
+|`disable/update-services`|
+|`disable/wp-sitemaps`|
+|`disable/xmlrpc`|
+|`disable/import-export`|
+|`disable/shortlinks`|
+|`disable/guess-permalinks`|
+|`disable/site-health`|Disables Site Health by default and makes it optional.|
+|`disable/wpautop`|Prevent WordPress from adding extra `<p></p>` tags to the content.|
+|`disable/wptexturize`|Avoid converting quotation marks `"` into symbols like `»`|
+|`disable/wp-favicon`|Restores the default `/favicon.ico` behaviour when no site icon is present.|
 
-**Perpetual WP** honors your choices whenever possible, and in other cases, you can modify the settings through wp-admin under `Settings > General`. For instance, while WordPress defaults to enabling post revisions with `WP_POST_REVISIONS` set to true, this plugin will automatically set it to `false` unless you specify a different value in your wp-config.php file.
+### Prevent a feature from being disabled
+WordPress use cases can vary greatly, and it’s possible that you may need some of the features that are disabled by the plugin. 
+
+> [!NOTE]  
+> **Perpetual WP** honors your choices whenever possible. Depending on the feature, you will be able to directly modifying it in `Settings > General`, creating a constant in `wp-config.php` or just using the `pw_modules` filter.
+
+For instance, while WordPress defaults to enabling post revisions with `WP_POST_REVISIONS` set to true, this plugin will automatically set it to `false` unless you define a different value in your `wp-config.php` file.
 
 For any other cases, you can use the filter `pw_modules`. This allows you to disable any feature via a child theme or directly by other plugin developers, preventing undesired behaviours.
+```php
+add_filter("pw_modules", function($modules){
+  // Do not remove privacy tools and emojis.
+  $keep = ["disable/privacy-tools", "disable/emojis"];
+  return array_diff($modules, $keep);
+});
+```
+
+## Enhanced security by default
+`TO-DO`
 
 ## Functions
-Perpetual-wp also introduces a few functions for developers. All functions will be prefixed with `pw_` instead the default `wp_`.
+Perpetual WP also introduces a few functions for developers. All functions will be prefixed with `pw_` instead the default `wp_`.
 
 Function|Description
 ---|---
