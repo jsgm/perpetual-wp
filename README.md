@@ -17,7 +17,7 @@ Perpetual WP removes bloat and delivers straightforward enhancements to your Wor
 
 While alternatives like [ClassicPress](https://classicpress.net), which is a full fork of WordPress, Perpetual WP takes a unique approach as a plugin, ensuring full compatibility with the latest version of WordPress.
 
-## Disabled features
+## Features
 **Perpetual WP** disables unnecessary features to keep the admin panel cleaner and improve performance. 
 
 ||Description|
@@ -26,15 +26,15 @@ While alternatives like [ClassicPress](https://classicpress.net), which is a ful
 |`disable/initial-content`|Deletes the default content —"Hello world!", "Sample Page," and "Privacy Policy"—.|
 |`disable/admin-email-verification`|Disable admin email verifications. For more details, [check this](https://make.wordpress.org/core/2019/10/17/wordpress-5-3-admin-email-verification-screen/).|
 |`disable/capital-p-dangit`|Prevents "Wordpress" from being converted to "WordPress".|
-|`disable/emojis`||
+|`disable/emojis`|
 |`disable/generators`|
 |`disable/oembed`|
 |`disable/post-by-email`|
-|`disable/post-revisions`|
+|`disable/post-revisions`|Disables posts revisions by default.|
 |`disable/privacy-tools`|
 |`disable/update-services`|
 |`disable/wp-sitemaps`|
-|`disable/xmlrpc`|
+|`disable/xmlrpc`|Blocks xmlrpc.php.|
 |`disable/import-export`|
 |`disable/shortlinks`|
 |`disable/guess-permalinks`|
@@ -59,9 +59,6 @@ add_filter("pw_modules", function($modules){
   return array_diff($modules, $keep);
 });
 ```
-
-## Enhanced security by default
-`TO-DO`
 
 ## Functions
 Perpetual WP also introduces a few functions for developers. All functions will be prefixed with `pw_` instead the default `wp_`.
