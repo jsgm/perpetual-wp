@@ -53,18 +53,18 @@ $modules = apply_filters("pw_modules", [
     "disable/site-health",
     "disable/wpautop",
     "disable/wptexturize",
-
+    "disable/wp-favicon",
+    
     // TO-DO: "features/avatars" (Remove Gravatar -Automattic owned company- and restore classic avatar upload)
-    // TO-DO: "features/blank-favicon"
     // TO-DO: "features/email" (SMTP, Fully Disable emails)
-    // TO-DO: "features/maintenance"
+    // "features/maintenance",
     "features/page-priorize",
 
     // Security enhancements.
     // TO-DO: "security/salt-shuffler"
     // TO-DO: "security/2fa"
-    // TO-DO: "security/limit-login-attempts"
     // TO-DO: "security/logout-idle-users"
+    "security/login",
     "security/disallow-file-edit",
     "security/force-ssl",
 

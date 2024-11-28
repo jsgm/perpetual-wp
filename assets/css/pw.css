@@ -1,14 +1,17 @@
 #wpadminbar .quicklinks #wp-admin-bar-pw-my-account .ab-icon{
     margin:0px;
 }
+#wpadminbar .quicklinks #wp-admin-bar-pw-user-maintenance:hover>.ab-item,
 #wpadminbar .quicklinks #wp-admin-bar-pw-environment-type:hover>.ab-item{
     background:transparent;
     color:white;
     cursor:help;
 }
+#wpadminbar .quicklinks li#wp-admin-bar-pw-user-maintenance .ab-icon:before,
 #wpadminbar .quicklinks li#wp-admin-bar-pw-environment-type .ab-icon:before{
     color:rgba(240,246,252,.6) !important;
 }
+#wpadminbar .quicklinks #wp-admin-bar-pw-user-maintenance div.ab-item,
 #wpadminbar .quicklinks #wp-admin-bar-pw-environment-type div.ab-item,
 #wpadminbar .quicklinks #wp-admin-bar-pw-my-account div.ab-item{
     display:flex;

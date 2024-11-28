@@ -3,6 +3,7 @@ if(!defined("ABSPATH")){
     http_response_code(403);
     exit;
 }
+remove_action("init", "smilies_init", 5);
 
 /*/
 /* Disable emojis

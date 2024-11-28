@@ -35,7 +35,7 @@ add_action('admin_init', function(){
     register_setting('general', 'pw_site_health', 'esc_attr');
 });
 
-if(!pw_site_health_enabled()){
+if(!pw_site_health_enabled()){    
     add_action('wp_dashboard_setup', function(){
         remove_meta_box('dashboard_site_health', 'dashboard', 'normal');
     });
